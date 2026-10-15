@@ -12,8 +12,8 @@ if [ ! -f "$PROJECT_ROOT/params.txt" ]; then
 fi
 
 # TODO: Copia aquí, a mano, desde params.txt, el nombre del secreto y la contraseña de la base de datos.
-SECRET_NAME=<nombre del secreto>
-DB_PASS=<contraseña de la BD>
+SECRET_NAME=prod/anuncios/010503
+DB_PASS=44f496e414bf85a68ba105e3
 
 DB_USER="admin"
 DB_NAME="anuncios"
@@ -26,6 +26,6 @@ echo -n "Creando el secreto '$SECRET_NAME'... "
 
 # TODO Crea el secreto en Secrets Manager con el nombre $SECRET_NAME y el contenido de $SECRET_JSON.
 # Pista: aws secretsmanager create-secret. No imprimas el valor del secreto.
-aws secretsmanager create-secret --name <nombre> --secret-string <json> --output text >/dev/null
+aws secretsmanager create-secret --name prod/anuncios/010503 --secret-string $SECRET_JSON --output text >/dev/null
 unset SECRET_JSON
 echo "listo."

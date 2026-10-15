@@ -12,8 +12,8 @@ if [ ! -f "$PROJECT_ROOT/params.txt" ]; then
 fi
 
 # TODO: Copia aquí, a mano, desde params.txt, el usuario del examen y su contraseña.
-EXAM_USER_PASS=<contraseña del usuario del examen>
-EXAM_USER=<usuario del examen>
+EXAM_USER_PASS=Corr-cf50d2c0-A1
+EXAM_USER=corrector
 
 # TODO: El User Pool se llama `anuncios-pool` y su App Client `anuncios-front`.
 # Escribe esos nombres en los comandos `create-user-pool` y `create-user-pool-client`.
@@ -25,7 +25,7 @@ AWS_REGION="$(aws configure get region)"
 
 echo -n "Creando User Pool... "
 USER_POOL_ID=$(aws cognito-idp create-user-pool \
-    --pool-name <nombre del pool> \
+    --pool-name anuncios-pool \
     --policies '{"PasswordPolicy":{"MinimumLength":8,"RequireUppercase":true,"RequireLowercase":true,"RequireNumbers":true,"RequireSymbols":false}}' \
     --query "UserPool.Id" \
     --output text)
@@ -40,7 +40,7 @@ echo -n "Creando App Client... "
 # shellcheck disable=SC2086
 CLIENT_ID=$(aws cognito-idp create-user-pool-client \
     --user-pool-id "$USER_POOL_ID" \
-    --client-name <nombre del cliente> \
+    --client-name anuncios-front \
     --no-generate-secret \
     --explicit-auth-flows $AUTH_FLOWS \
     --query "UserPoolClient.ClientId" \
